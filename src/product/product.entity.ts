@@ -3,7 +3,7 @@ import { Product } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime";
 import { Exclude, Expose, Transform } from "class-transformer";
 import { forOwn } from "lodash";
-import { CategoryEntity } from "src/category/category.entity";
+import { CategoryEntity } from "../category/category.entity";
 
 @ObjectType()
 export class ProductEntity implements Product {
