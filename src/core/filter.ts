@@ -1,4 +1,5 @@
 import { ArgsType, Field } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
 import { Prisma } from "@prisma/client";
 import { Transform } from "class-transformer";
 import { IsIn, ValidateIf } from "class-validator";
@@ -23,18 +24,22 @@ export class QueryFilter<T_W extends Record<string, any>, T_O extends Record<str
   @QueryParam
   @QueryInt
   @Field({defaultValue: 0})
+  @ApiProperty({required: false})
   skip: number = 0;
 
   @QueryParam
   @QueryInt
   @Field({defaultValue: 10})
+  @ApiProperty({required: false})
   take: number = 10;
 
   @Transform(() => undefined)
   @QueryParam
+  @ApiProperty({required: false})
   orderBy?: undefined;
 
   @QueryParam
+  @ApiProperty({required: false})
   @IsIn(['asc', 'desc'])
   order?: 'asc' | 'desc';
 
