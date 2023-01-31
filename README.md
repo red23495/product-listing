@@ -20,7 +20,7 @@ Authorization: Bearer <your token>
 ```
 
 # How to crud the products api?
-Refer to the swagger documentation to the url `/swagger/`, there will be a list of all the available api endpoints with specification. You will find all the api endpoints for curd'ing product there.
+Refer to the swagger documentation to the url `/api/`, there will be a list of all the available api endpoints with specification. You will find all the api endpoints for curd'ing product there.
 
 To upload image, you need to upload file in the endpoint `/product/<product id>/image/`, the name of the parameter of file should be `file`.
 
