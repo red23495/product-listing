@@ -1,13 +1,17 @@
+import { ArgsType, Field } from "@nestjs/graphql";
 import { Prisma } from "@prisma/client";
 import { QueryFilter, QueryParam } from "../core/filter";
 
+@ArgsType()
 export class ProductFilter extends QueryFilter<Prisma.ProductWhereInput, Prisma.ProductOrderByWithRelationInput> {
 
   protected $fields: any[] = ['search', 'categories']
 
   @QueryParam
+  @Field({nullable: true})
   search?: string;
 
+  @Field(() => [String], {nullable: true})
   @QueryParam
   categories?: string[] | string
 

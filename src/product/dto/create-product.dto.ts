@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { ArgsType, Field } from "@nestjs/graphql";
 import { Prisma } from "@prisma/client";
 import { Transform } from "class-transformer";
 import { IsNotEmpty, Min, Validate, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
@@ -35,19 +36,24 @@ export const CategoryValidator = (target: Object, propertyKey: string | symbol) 
 }
 
 
+@ArgsType()
 export class CreateProductDto {
 
   @IsNotEmpty()
+  @Field()
   name: string;
 
+  @Field()
   @Validate(UniqueCodeValidation)
   code: string;
 
+  @Field(type => Number)
   @IsNotEmpty()
   @Min(0)
   unit_price: number;
 
   @CategoryValidator
+  @Field(type => [String], {nullable: true})
   categories: Prisma.CategoryCreateNestedManyWithoutProductsInput;
 
 }

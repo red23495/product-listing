@@ -3,6 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { SetMetadata } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { Reflector } from '@nestjs/core';
+import { GqlExecutionContext } from '@nestjs/graphql';
 
 export const IS_PUBLIC_KEY = 'isPublic';
 export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
@@ -12,6 +13,11 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
   constructor(private reflector: Reflector) {
     super();
+  }
+
+  getRequest(context: ExecutionContext) {
+    const ctx = GqlExecutionContext.create(context);
+    return ctx.getContext().req;
   }
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {

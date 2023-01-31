@@ -1,3 +1,4 @@
+import { ArgsType, Field } from "@nestjs/graphql";
 import { Prisma } from "@prisma/client";
 import { Transform } from "class-transformer";
 import { IsIn, ValidateIf } from "class-validator";
@@ -14,17 +15,19 @@ export const QueryInt = Transform(({ value }) => {
   return ret;
 });
 
-
+@ArgsType()
 export class QueryFilter<T_W extends Record<string, any>, T_O extends Record<string, any>> {
 
   protected $fields: string[] = [];
 
   @QueryParam
   @QueryInt
+  @Field({defaultValue: 0})
   skip: number = 0;
 
   @QueryParam
   @QueryInt
+  @Field({defaultValue: 10})
   take: number = 10;
 
   @Transform(() => undefined)
