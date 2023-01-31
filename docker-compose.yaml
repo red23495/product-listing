@@ -17,7 +17,7 @@ services:
     ports:
       - 80:3000
     volumes:
-      - ./upload:./upload
+      - ./upload:/usr/app/upload
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/product_listing?schema=public
       JWT_SECRET: secret_key
